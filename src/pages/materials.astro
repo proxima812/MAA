@@ -1,0 +1,10 @@
+---
+import AllMaterials from "~/components/supabase/AllMaterials";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Welcome to Astro.">
+ <section class="section-top">
+  <AllMaterials client:only="react" />
+ </section>
+</Layout>

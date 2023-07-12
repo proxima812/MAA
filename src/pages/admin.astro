@@ -1,0 +1,8 @@
+---
+import MySession from "../components/supabase/MySession";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Welcome to Astro.">
+ <MySession client:only="react" />
+</Layout>

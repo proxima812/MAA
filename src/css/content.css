@@ -1,0 +1,12 @@
+:is(.content) a {
+ @apply text-blue-500 underline underline-offset-4 transition-colors ease-in;
+}
+:is(.content) a:hover {
+ @apply text-blue-400 transition-colors ease-in;
+}
+
+.btn {
+ @apply px-4 py-1 rounded-md text-white;
+}
+
+

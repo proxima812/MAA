@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+ .myContainer {
+  @apply container max-w-5xl px-5 mx-auto;
+ }
+ .section-top {
+  @apply mt-14 md:mt-28;
+ }
+}
+.ql-editor p,
+.ql-editor ol,
+.ql-editor ul,
+.ql-editor pre,
+.ql-editor blockquote,
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6 {
+ font-size: 16px !important;
+}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+ max-height: auto;
+}

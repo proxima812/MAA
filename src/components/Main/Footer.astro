@@ -1,0 +1,27 @@
+---
+import { nav_links } from '~/data/NavLinks'
+import { ourLinks } from '~/data/OurLinks'
+const head_span = "font-bold";
+---
+
+<footer class="py-5 section-top">
+ <div class="myContainer">
+  <section class="grid place-items-start grid-cols-3 gap-4">
+    <div class="flex flex-col gap-3">
+     <span class={head_span}>Страницы</span>
+     {nav_links.map((item)=>(
+      <a href={item.linkTo} class="underline underline-offset-4">{item.linkName}</a>
+     ))}
+    </div>
+    <div class="flex flex-col gap-3">
+      <span class={head_span}>Ссылки</span>
+      {ourLinks.map((item)=>(
+      <a href={item.linkTo} class="underline underline-offset-4">{item.linkName}</a>
+     ))}
+    </div>
+    <div class="flex flex-col gap-3">
+     <span class={head_span}>Мы в соц. сетях</span>
+    </div>
+  </section>
+ </div>
+</footer>

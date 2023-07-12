@@ -1,0 +1,60 @@
+---
+import Link from "~/components/CustomsUI/Link.astro";
+import TelegramLink from "~/components/CustomsUI/TelegramLink.astro";
+import { nav_links } from "~/data/NavLinks";
+import CurrentDate from "../CurrentDateInMonths";
+---
+
+<div class="w-full bg-slate-100 py-2">
+ <div class="myContainer">
+  <span class="text-slate-700 text-sm flex items-center gap-1 justify-center"
+   >Актуальная информация на сайте <u><CurrentDate /></u></span
+  >
+ </div>
+</div>
+<header class="bg-white py-5">
+ <div class="myContainer">
+  <div class="flex gap-5 items-center justify-between">
+   <a href="/"> <img src="/logo.svg" alt="Логотип" /></a>
+   <nav class="flex gap-7 items-center hidden lg:flex">
+    {nav_links.map((item) => <Link href={item.linkTo}>{item.linkName}</Link>)}
+   </nav>
+   <span
+    id="menuOpen"
+    class="px-2 py-1 rounded-md bg-slate-100 flex items-center gap-1 lg:hidden"
+    ><svg
+     width="14"
+     height="14"
+     viewBox="0 0 14 14"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+    >
+     <path
+      d="M0.583382 5.83265C0.428659 5.83265 0.280274 5.77119 0.170869 5.66178C0.0614634 5.55238 0 5.40399 0 5.24927V0.583382C0 0.428659 0.0614634 0.280274 0.170869 0.170869C0.280274 0.0614634 0.428659 0 0.583382 0H5.25044C5.40516 0 5.55355 0.0614634 5.66295 0.170869C5.77236 0.280274 5.83382 0.428659 5.83382 0.583382V5.24927C5.83382 5.40399 5.77236 5.55238 5.66295 5.66178C5.55355 5.77119 5.40516 5.83265 5.25044 5.83265H0.583382ZM8.75073 5.83265C8.59601 5.83265 8.44762 5.77119 8.33822 5.66178C8.22881 5.55238 8.16735 5.40399 8.16735 5.24927V0.583382C8.16735 0.428659 8.22881 0.280274 8.33822 0.170869C8.44762 0.0614634 8.59601 0 8.75073 0H13.4166C13.5713 0 13.7197 0.0614634 13.8291 0.170869C13.9385 0.280274 14 0.428659 14 0.583382V5.24927C14 5.40399 13.9385 5.55238 13.8291 5.66178C13.7197 5.77119 13.5713 5.83265 13.4166 5.83265H8.75073ZM0.583382 14C0.428659 14 0.280274 13.9385 0.170869 13.8291C0.0614634 13.7197 0 13.5713 0 13.4166V8.74956C0 8.59484 0.0614634 8.44645 0.170869 8.33705C0.280274 8.22764 0.428659 8.16618 0.583382 8.16618H5.25044C5.40516 8.16618 5.55355 8.22764 5.66295 8.33705C5.77236 8.44645 5.83382 8.59484 5.83382 8.74956V13.4166C5.83382 13.5713 5.77236 13.7197 5.66295 13.8291C5.55355 13.9385 5.40516 14 5.25044 14H0.583382ZM8.75073 14C8.59601 14 8.44762 13.9385 8.33822 13.8291C8.22881 13.7197 8.16735 13.5713 8.16735 13.4166V8.74956C8.16735 8.59484 8.22881 8.44645 8.33822 8.33705C8.44762 8.22764 8.59601 8.16618 8.75073 8.16618H13.4166C13.5713 8.16618 13.7197 8.22764 13.8291 8.33705C13.9385 8.44645 14 8.59484 14 8.74956V13.4166C14 13.5713 13.9385 13.7197 13.8291 13.8291C13.7197 13.9385 13.5713 14 13.4166 14H8.75073Z"
+      fill="#050320"></path>
+    </svg><b>Меню</b></span
+   >
+   <nav
+    id="menu"
+    title="Мобильное меню"
+    class="z-20 text-lg absolute top-[105px] left-0 w-full h-full bg-slate-100/60 backdrop-blur-lg py-5 flex flex-col gap-6 items-center lg:hidden"
+   >
+    {nav_links.map((item) => <Link href={item.linkTo}>{item.linkName}</Link>)}
+    <TelegramLink />
+   </nav>
+   <span class="hidden lg:block"><TelegramLink /></span>
+  </div>
+ </div>
+
+ <script>
+  const menuOpenButton = document.getElementById("menuOpen");
+  const menu = document.getElementById("menu");
+
+  menu.style.display = "none"; // Сначала скрываем меню
+
+  // При клике на кнопку открывания меню, переключаем отображение меню
+  menuOpenButton.addEventListener("click", () => {
+   menu.style.display = menu.style.display === "none" ? "flex" : "none";
+  });
+ </script>
+</header>
