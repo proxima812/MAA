@@ -4,10 +4,10 @@
 
 @layer components {
  .myContainer {
-  @apply container max-w-5xl px-5 mx-auto;
+  @apply container max-w-[1044px] px-5 mx-auto;
  }
  .section-top {
-  @apply mt-14 md:mt-28;
+  @apply mt-14 md:mt-24;
  }
 }
 .ql-editor p,

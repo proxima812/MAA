@@ -1,0 +1,121 @@
+---
+import BaseHead from "~/components/Main/BaseHead.astro";
+import Footer from "~/components/Main/Footer.astro";
+import Header from "~/components/Main/Header.astro";
+import "~/css/base.css";
+import "~/css/content.css";
+
+interface Props {
+ title: string;
+ frontmatter: string;
+ description: string;
+ typeSite: string;
+ OGmainPoster: string;
+ dateModified: string;
+ datePublished: string;
+}
+
+const { frontmatter } = Astro.props;
+
+import { machineDate, readableDate } from "~/libs/dates";
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+  <BaseHead
+   title={frontmatter.title}
+   description={frontmatter.description}
+   dateModified={frontmatter.dateModified}
+   datePublished={frontmatter.datePublished}
+   OGmainPoster={frontmatter.img}
+   typeSite="article"
+  />
+ </head>
+ <body class="text-[#020519]">
+  <Header />
+  <div class="myContainer">
+   <article class="section-top prose max-w-3xl mx-auto">
+    <div class="relative flex flex-col">
+     <button id="copyLink" class="bg-black p-2 rounded-md self-end">
+      <svg
+       width="15"
+       height="18"
+       viewBox="0 0 15 18"
+       fill="none"
+       xmlns="http://www.w3.org/2000/svg"
+      >
+       <path
+        d="M1.5 3.1275V12.75C1.49985 13.7021 1.86185 14.6186 2.51256 15.3136C3.16327 16.0086 4.05397 16.43 5.004 16.4925L5.25 16.5H11.871C11.7159 16.9386 11.4287 17.3184 11.0488 17.587C10.669 17.8557 10.2152 17.9999 9.75 18H4.5C3.30653 18 2.16193 17.5259 1.31802 16.682C0.474106 15.8381 3.09355e-07 14.6935 3.09355e-07 13.5V5.25C-0.00024372 4.78451 0.143892 4.3304 0.412542 3.95026C0.681193 3.57012 1.06113 3.28266 1.5 3.1275ZM12.75 0C13.3467 0 13.919 0.237053 14.341 0.65901C14.7629 1.08097 15 1.65326 15 2.25V12.75C15 13.3467 14.7629 13.919 14.341 14.341C13.919 14.7629 13.3467 15 12.75 15H5.25C4.65326 15 4.08097 14.7629 3.65901 14.341C3.23705 13.919 3 13.3467 3 12.75V2.25C3 1.65326 3.23705 1.08097 3.65901 0.65901C4.08097 0.237053 4.65326 0 5.25 0H12.75Z"
+        fill="white"></path>
+      </svg>
+     </button>
+     <div
+      id="popup"
+      class="absolute top-[-40px] right-0 bg-gray-900 text-white px-3 py-1 rounded shadow hidden"
+     >
+      Ссылка скопирована <span class="text-lg">🤗</span>
+     </div>
+    </div>
+
+    <h1>{frontmatter.title}</h1>
+    {
+     (!!frontmatter.datePublished || !!frontmatter.dateModified) && (
+      <div class="text-sm">
+       Дата:{" "}
+       <b class="tracking-wider">
+        <time
+         datetime={machineDate(frontmatter.datePublished)}
+         set:text={readableDate(frontmatter.datePublished)}
+        />
+       </b>
+       {!!frontmatter.dateModified && (
+        <>
+         &#8212; Обновлено
+         <b class="tracking-wider">
+          <time
+           datetime={machineDate(frontmatter.dateModified)}
+           set:text={readableDate(frontmatter.dateModified)}
+          />
+         </b>
+        </>
+       )}
+      </div>
+     )
+    }
+    <slot />
+   </article>
+  </div>
+
+  <script is:inline>
+   const link = document.getElementById("copyLink");
+   const currentURL = window.location.href;
+   const popup = document.getElementById("popup");
+
+   link.href = currentURL;
+
+   link.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    navigator.clipboard
+     .writeText(currentURL)
+     .then(function () {
+      console.log("URL скопирован!");
+      showPopup();
+     })
+     .catch(function (error) {
+      console.error("Не удалось скопировать URL: ", error);
+     });
+   });
+
+   function showPopup() {
+    popup.style.display = "block";
+    setTimeout(function () {
+     popup.style.display = "none";
+    }, 900);
+   }
+  </script>
+
+  <Footer />
+ </body>
+</html>

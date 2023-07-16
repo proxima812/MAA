@@ -1,19 +1,19 @@
 export const nav_links = [
+  {
+   linkName: "О АМЗ",
+   linkTo: "/about",
+  },
  {
-  linkName: "Главная",
-  linkTo: "/",
+  linkName: "Статьи",
+  linkTo: "/articles",
  },
  {
-  linkName: "О АМЗ",
-  linkTo: "/about",
- },
- {
-  linkName: "Онлайн собрания",
+  linkName: "Собрания",
   linkTo: "/groups",
  },
  {
-  linkName: "Контакты",
-  linkTo: "/contacts",
+  linkName: "Как проходят группы?",
+  linkTo: "/online",
  },
  {
   linkName: "Материалы",

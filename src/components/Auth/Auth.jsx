@@ -1,5 +1,7 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useState } from "react";
+import Tabs from "../CustomsUI/Tabs";
+import MyGroups from "../supabase/MyGroups";
 import MyMaterials from "../supabase/MyMaterials";
 
 function Auth() {
@@ -74,29 +76,35 @@ function Auth() {
     </div>
    ) : (
     <>
-     <div className="section-top">
-      <div className="flex items-center gap-3 justify-between">
-       <a
-        href="/materials"
-        className="bg-indigo-500 text-white max-w-full font-semibold px-5 rounded-md py-1"
-       >
-        К материалам
-       </a>
-       <div className="flex gap-3">
-        <span className="font-semibold  bg-gray-100 max-w-full  focus:outline-none px-5 rounded-md py-1">
-         {user.email}
-        </span>
-        <button
-         className="bg-red-500 text-white max-w-full font-semibold focus:outline-none px-5 rounded-md py-1"
-         onClick={handleLogout}
-        >
-         Выйти с аккаунта
-        </button>
+     <div className="section-top flex flex-col gap-10">
+      <div className="flex flex-wrap items-center gap-5">
+       <span className="font-semibold  bg-slate-100 max-w-full  focus:outline-none px-5 rounded-md py-1">
+        {user.email}
+       </span>
+       <button className="bg-red-500 max-w-full btn" onClick={handleLogout}>
+        Выйти с аккаунта
+       </button>
+      </div>
+
+      <Tabs>
+       <div label="Добавить материалы">
+        <div className="flex items-center gap-3">
+         <a href="/materials" className="bg-indigo-500 max-w-full btn">
+          К материалам
+         </a>
+        </div>
+        <MyMaterials user={user} />
        </div>
-      </div>
-      <div>
-       <MyMaterials user={user} />
-      </div>
+       <div label="Добавить собрания">
+        {" "}
+        <div className="flex items-center gap-3">
+         <a href="/groups" className="bg-indigo-500 max-w-full btn">
+          К собраниям
+         </a>
+        </div>
+        <MyGroups user={user} />
+       </div>
+      </Tabs>
      </div>
     </>
    )}

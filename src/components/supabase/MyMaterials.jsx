@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // import styles
 import { quillModules } from "../../js/quillModules.js";
-import Material from "../supabase/Material";
+import Material from "../supabase/materials/Material";
 import { supabase } from "../supabaseClient.js";
 
 function MyMaterials({ user }) {
  const [name, setName] = useState("");
  const [materials, setMaterials] = useState([]);
  const [description, setDescription] = useState("");
+ const [loading, setLoading] = useState(true);
 
  useEffect(() => {
   getMaterials();
@@ -26,9 +27,11 @@ function MyMaterials({ user }) {
    if (error) throw error;
    if (data != null) {
     setMaterials(data);
+    setLoading(false); // set loading to false once data is fetched
    }
   } catch (error) {
    alert(error.message);
+   setLoading(false); // also set loading to false if there's an error
   }
  }
 
@@ -74,13 +77,21 @@ function MyMaterials({ user }) {
    </div>
 
    <div className="mt-10">
-    <h1 className="text-2xl">Ваш материал <b>({materials.length})</b></h1>
+    <h1 className="text-2xl">
+     Ваш материал <b>({materials.length})</b>
+    </h1>
    </div>
 
-   <div className="py-10 grid gap-5 grid-cols-1 md:grid-cols-2">
-    {materials.map((material) => (
-     <Material key={material.id} material={material} />
-    ))}
+   <div className="mt-10">
+    {loading ? (
+     <div className="green-place">Загрузка материалов...</div>
+    ) : (
+     <div className="pb-10 items-start grid gap-5 grid-cols-1 md:grid-cols-2">
+      {materials.map((material) => (
+       <Material key={material.id} material={material} />
+      ))}
+     </div>
+    )}
    </div>
   </div>
  );

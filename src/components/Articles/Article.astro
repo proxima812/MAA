@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import { machineDate, readableDate } from "~/libs/dates";
+const { article, url } = Astro.props;
+const simple_img = "../../../simples-imgs/simple-img.png";
+---
+
+<a
+ href={url}
+ aria-label={article.title}
+ class="overflow-hidden rounded-lg group flex flex-col items-center"
+>
+ <div aria-hidden="true" class="relative">
+  <Image
+   width={500}
+   height={500}
+   src={article.img || simple_img}
+   class="rounded-lg group group-hover:scale-[102.5%] transition-transform ease-linear"
+   alt="Сайт АМЗ: (изображение статьи)"
+   quality={"mid"}
+  />
+  <div
+   class="absolute top-3 left-3 bg-black/50 text-white p-2 rounded-lg backdrop-blur-sm"
+  >
+   {
+    (!!article.datePublished || !!article.dateModified) && (
+     <div class="text-xs">
+      Дата:{" "}
+      <b class="tracking-wider">
+       <time
+        datetime={machineDate(article.datePublished)}
+        set:text={readableDate(article.datePublished)}
+       />
+      </b>
+      {!!article.dateModified && (
+       <>
+        &#8212; Обновлено
+        <b class="tracking-wider">
+         <time
+          datetime={machineDate(article.dateModified)}
+          set:text={readableDate(article.dateModified)}
+         />
+        </b>
+       </>
+      )}
+     </div>
+    )
+   }
+  </div>
+ </div>
+ <div class="bg-gray-100 rounded-lg w-full p-5 flex flex-col gap-3">
+  <h3 class="text-xl font-semibold leading-snug">
+   {article.title}
+  </h3>
+ </div>
+</a>

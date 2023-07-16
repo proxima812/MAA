@@ -1,12 +1,16 @@
 ---
 import { Image } from "astro:assets";
+import { seo_settings_pages } from "~/data/SEOSettings";
 import img1 from "../assets/banner.png";
 import img2 from "../assets/banner2.png";
 import img3 from "../assets/banner3.png";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout
+ title={seo_settings_pages.page_about.title}
+ description={seo_settings_pages.page_about.description}
+>
  <main
   class="section-top prose prose-img:mx-auto prose-img:shadow-gray-100 prose-img:shadow-md prose-img:max-w-full md:prose-img:max-w-[815px] prose-img:rounded-lg prose-headings:px-0 prose-p:px-0 md:prose-headings:px-32 md:prose-p:px-32 prose-a:px-0 md:prose-a:px-32 prose-span:px-0 md:prose-span:px-32 max-w-none"
  >

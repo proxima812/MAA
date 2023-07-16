@@ -1,13 +1,65 @@
 ---
 export interface Props {
  title: string;
+ description: string;
+ typeSite: string;
+ OGmainPoster: string;
+ dateModified: string;
+ datePublished: string;
 }
-const {title} = Astro.props;
+const { title, description, typeSite, OGmainPoster, dateModified, datePublished } =
+ Astro.props as Props;
+
+import { verifications } from "~/data/consts";
+import Metricks from "../Metricks.astro";
+
+const cannonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <meta charset="UTF-8" />
 <meta name="description" content="Astro description" />
 <meta name="viewport" content="width=device-width" />
+
+<Metricks />
+
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" sizes="120x120" type="image/svg+xml" href="/favicon.svg" />
+<link
+ rel="apple-touch-icon"
+ type="image/png"
+ sizes="180x180"
+ href="/favicons/icon-180x180.png"
+/>
+{
+ verifications.VERIFICATION_YANDEX && (
+  <meta name="yandex-verification" content={verifications.VERIFICATION_YANDEX} />
+ )
+}
+{
+ verifications.VERIFICATION_GOOGLE && (
+  <meta name="google-site-verification" content={verifications.VERIFICATION_GOOGLE} />
+ )
+}
+{verifications.FBAPP && <meta property="fb:app_id" content={verifications.FBAPP} />}
+<meta property="og:type" content={typeSite} />
+<meta property="og:url" content={cannonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{OGmainPoster && <meta property="og:image" content={OGmainPoster} />}
+{dateModified && <meta property="og:updated_time" content={dateModified} />}
+{
+ typeSite === "article"
+  ? dateModified && <meta property="article:modified_time" content={dateModified} />
+  : null
+}
+{
+ typeSite === "article"
+  ? datePublished && <meta property="article:published_time" content={datePublished} />
+  : null
+}
+
 <meta name="generator" content={Astro.generator} />
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={cannonicalURL} />
 <title>{title}</title>

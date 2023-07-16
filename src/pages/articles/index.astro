@@ -1,0 +1,26 @@
+---
+import { seo_settings_pages } from "~/data/SEOSettings";
+import Article from "../../components/Articles/Article.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const allArticles = await Astro.glob("../articles/*.{md,mdx}");
+---
+
+<Layout
+ title={seo_settings_pages.page_articles.title}
+ description={seo_settings_pages.page_articles.description}
+>
+ <main class="section-top">
+  <div class="grid gap-5 grid-c ls-1 md:grid-cols-2">
+   {
+    allArticles
+     .sort(
+      (a, b) =>
+       new Date(b.frontmatter.datePublished).valueOf() -
+       new Date(a.frontmatter.datePublished).valueOf()
+     )
+     .map((article) => <Article url={article.url} article={article.frontmatter} />)
+   }
+  </div>
+ </main>
+</Layout>

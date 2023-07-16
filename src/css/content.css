@@ -4,9 +4,19 @@
 :is(.content) a:hover {
  @apply text-blue-400 transition-colors ease-in;
 }
-
 .btn {
- @apply px-4 py-1 rounded-md text-white;
+ @apply text-white font-semibold px-5 rounded-md py-1 leading-relaxed transition-transform hover:scale-95 ease-linear;
 }
 
-
+.green-place {
+ @apply bg-green-200 text-green-700 rounded-lg px-5 py-2;
+}
+.orange-place {
+ @apply bg-orange-200 text-orange-700 rounded-lg px-5 py-2;
+}
+.purple-place {
+ @apply bg-purple-200 text-purple-700 rounded-lg px-5 py-2;
+}
+.red-place {
+ @apply bg-red-200 text-red-700 rounded-lg px-5 py-2;
+}

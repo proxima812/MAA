@@ -1,27 +1,43 @@
 ---
-import { nav_links } from '~/data/NavLinks'
-import { ourLinks } from '~/data/OurLinks'
+import { nav_links } from "~/data/NavLinks";
+import { ourLinks, socials } from "~/data/OurLinks";
 const head_span = "font-bold";
+const link = "underline underline-offset-4 transition-colors hover:text-blue-500";
 ---
 
-<footer class="py-5 section-top">
+<footer class="pb-8 section-top">
  <div class="myContainer">
-  <section class="grid place-items-start grid-cols-3 gap-4">
-    <div class="flex flex-col gap-3">
-     <span class={head_span}>Страницы</span>
-     {nav_links.map((item)=>(
-      <a href={item.linkTo} class="underline underline-offset-4">{item.linkName}</a>
-     ))}
-    </div>
-    <div class="flex flex-col gap-3">
-      <span class={head_span}>Ссылки</span>
-      {ourLinks.map((item)=>(
-      <a href={item.linkTo} class="underline underline-offset-4">{item.linkName}</a>
-     ))}
-    </div>
-    <div class="flex flex-col gap-3">
-     <span class={head_span}>Мы в соц. сетях</span>
-    </div>
+  <section class="grid place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+   <div class="flex flex-col gap-3">
+    <span class={head_span}>Страницы</span>
+    {
+     nav_links.map((item) => (
+      <a href={item.linkTo} class={link}>
+       {item.linkName}
+      </a>
+     ))
+    }
+   </div>
+   <div class="flex flex-col gap-3">
+    <span class={head_span}>Ссылки</span>
+    {
+     ourLinks.map((item) => (
+      <a href={item.linkTo} class={link} rel={item.nofollow}>
+       {item.linkName}
+      </a>
+     ))
+    }
+   </div>
+   <div class="flex flex-col gap-3">
+    <span class={head_span}>Мы в соц. сетях</span>
+    {
+     socials.map((item) => (
+      <a href={item.linkTo} class={link}>
+       {item.linkName}
+      </a>
+     ))
+    }
+   </div>
   </section>
  </div>
 </footer>

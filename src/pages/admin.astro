@@ -1,8 +1,10 @@
 ---
+import { seo_settings_pages } from '~/data/SEOSettings'
 import MySession from "../components/supabase/MySession";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout  title={seo_settings_pages.page_admin.title}
+ description={seo_settings_pages.page_admin.description}>
  <MySession client:only="react" />
 </Layout>

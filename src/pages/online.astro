@@ -1,0 +1,164 @@
+---
+import { Image } from "astro:assets";
+import { seo_settings_pages } from "~/data/SEOSettings";
+import img from "../assets/tg-img.jpeg";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+ title={seo_settings_pages.page_online.title}
+ description={seo_settings_pages.page_online.description}
+>
+ <main class="section-top">
+  <div class="prose max-w-3xl mx-auto">
+   <h1>Как проводятся онлайн группы у АМЗ?</h1>
+   <a
+    href="https://telegram.org/blog/group-video-calls/ru"
+    rel="nofollow"
+    class="underline underline-offset-4 text-blue-500"
+    >Официальное руководство от Telegram</a
+   >
+   <span class="block text-red-500"
+    >Взято с целью ознакомить новичков АМЗ для собрания.</span
+   >
+   <h3>Групповые видеозвонки</h3>
+   <p>
+    Голосовой чат в любой группе теперь можно мгновенно превратить в видеоконференцию —
+    достаточно, чтобы любой из участников включил видеорежим, нажав на значок камеры.
+   </p>
+   <div title="Видео">
+    <video
+     class=""
+     loop
+     muted
+     poster=""
+     title="Пора подыскивать 'Голосовым Чатам' новое название."
+     preload="auto"
+    >
+     <source src="/video.mp4" type="video/mp4" />
+    </video>
+   </div>
+   <p>
+    Любую из видеотрансляций можно развернуть на полный экран, нажав на неё. Вы также
+    можете закрепить видео от того или иного собеседника, чтобы камера не переключалась на
+    новых участников, когда они входят в чат.
+   </p>
+
+   <blockquote>
+    Чтобы запустить конференцию, выберите «Голосовой чат» в меню ⋮ в профиле любой группы,
+    в которой являетесь администратором. Для пользователей iOS кнопка «Голосовой чат»
+    доступна прямо из профиля группы.
+   </blockquote>
+
+   <p>
+    Как и раньше, в голосовом режиме без видео можно разговаривать с неограниченным числом
+    собеседников. Режим видеоконференций в данный момент доступен первым 30 участникам,
+    подключившимся к чату. Этот лимит скоро будет увеличен, чтобы пользователи Telegram
+    могли транслировать лекции, игровые стримы, фестивали и т.д.
+   </p>
+
+   <h3>Трансляция экрана</h3>
+   <p>
+    Вы можете транслировать не только видео с задней или фронтальной камеры устройства, но
+    и изображение с экрана — или использовать и то, и другое параллельно.
+   </p>
+   <div title="Видео">
+    <video class="" loop muted poster="" preload="auto">
+     <source src="/video2.mp4" type="video/mp4" />
+    </video>
+   </div>
+
+   <blockquote>
+    Чтобы включить трансляцию экрана, нажмите на ⋮ или ⋯ в настройках голосового чата.
+   </blockquote>
+   <h3>Настройки шумоподавления</h3>
+   <p>
+    В новой версии улучшено шумоподавление, чтобы Вы могли наслаждаться качественным
+    звуком без посторонних шумов. При необходимости шумоподавление можно отключить в
+    настройках голосового чата.
+   </p>
+   <Image src={img} alt="Шумопадавление" class="rounded-lg" width={420} height={420} />
+   <h3>Поддержка планшетов и компьютеров</h3>
+   <p>
+    Интерфейс групповых звонков оптимизирован для больших экранов ноутбуков и компьютеров,
+    а также планшетов — как в горизонтальном, так и в вертикальном положении. Кнопка в
+    правом верхнем углу разворачивает боковую панель, позволяющую просматривать
+    видеотрансляции и список участников на одном экране.
+   </p>
+   <div title="Видео">
+    <video class="" loop muted poster="" preload="auto">
+     <source src="/video3.mp4" type="video/mp4" />
+    </video>
+   </div>
+   <p>
+    На компьютере голосовой чат открывается в отдельном окне, чтобы удобно было
+    переписываться в чатах, не теряя из виду видеоконференцию. При трансляции экрана через
+    приложения Telegram для компьютеров Вы можете показать изображение как всего рабочего
+    стола целиком, так и только из выбранной программы.
+   </p>
+   <div title="Видео">
+    <video class="" loop muted poster="" preload="auto">
+     <source src="/video4.mp4" type="video/mp4" />
+    </video>
+   </div>
+   <p>
+    Если Вы смотрите видеоконференцию с компьютера, каждый раз, когда кто-нибудь из
+    участников запустит трансляцию экрана, этот видеопоток будет автоматически закреплён —
+    что удобно для рабочих совещаний и презентаций.
+   </p>
+   <span> <b>25 июня 2021</b> Команда <b>Telegram</b></span>
+  </div>
+ </main>
+ <script is:inline>
+  const options = {
+   root: null,
+   rootMargin: "0px",
+   threshold: 0.1,
+  };
+
+  let observer = new IntersectionObserver(handleIntersect, options);
+  document.querySelectorAll("video").forEach((video) => {
+   observer.observe(video);
+  });
+
+  function handleIntersect(entries, observer) {
+   entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+     let video = entry.target;
+     video.play();
+    } else {
+     let video = entry.target;
+     video.pause();
+    }
+   });
+  }
+ </script>
+ <script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+   var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
+
+   if ("IntersectionObserver" in window) {
+    var lazyVideoObserver = new IntersectionObserver(function (entries, observer) {
+     entries.forEach(function (video) {
+      if (video.isIntersecting) {
+       for (var source in video.target.children) {
+        var videoSource = video.target.children[source];
+        if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+         videoSource.src = videoSource.dataset.src;
+        }
+       }
+
+       video.target.load();
+       video.target.classList.remove("lazy");
+       lazyVideoObserver.unobserve(video.target);
+      }
+     });
+    });
+
+    lazyVideos.forEach(function (lazyVideo) {
+     lazyVideoObserver.observe(lazyVideo);
+    });
+   }
+  });
+ </script>
+</Layout>

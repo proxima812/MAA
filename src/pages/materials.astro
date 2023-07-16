@@ -1,9 +1,12 @@
 ---
-import AllMaterials from "~/components/supabase/AllMaterials";
+
+import AllMaterials from '~/components/supabase/materials/AllMaterials'
 import Layout from "../layouts/Layout.astro";
+import { seo_settings_pages } from '~/data/SEOSettings'
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout  title={seo_settings_pages.page_materials.title}
+ description={seo_settings_pages.page_materials.description}>
  <section class="section-top">
   <AllMaterials client:only="react" />
  </section>
