@@ -10,8 +10,8 @@ interface Props extends BaseHeadProps {
  description: string;
  typeSite: string;
  OGmainPoster: string;
- dateModified: string;
- datePublished: string;
+ dateModified?: string;
+ pubDate: string;
 }
 
 const { ...attrs } = Astro.props as Props;

@@ -10,9 +10,9 @@ interface Props {
  frontmatter: string;
  description: string;
  typeSite: string;
- OGmainPoster: string;
- dateModified: string;
- datePublished: string;
+ OGmainPoster?: string;
+ dateModified?: string;
+ pubDate: string;
 }
 
 const { frontmatter } = Astro.props;
@@ -26,8 +26,8 @@ import { machineDate, readableDate } from "~/libs/dates";
   <BaseHead
    title={frontmatter.title}
    description={frontmatter.description}
-   dateModified={frontmatter.dateModified}
-   datePublished={frontmatter.datePublished}
+   dateModified={frontmatter?.dateModified}
+   pubDate={frontmatter.pubDate}
    OGmainPoster={frontmatter.img}
    typeSite="article"
   />
@@ -60,13 +60,13 @@ import { machineDate, readableDate } from "~/libs/dates";
 
     <h1>{frontmatter.title}</h1>
     {
-     (!!frontmatter.datePublished || !!frontmatter.dateModified) && (
+     (!!frontmatter.pubDate || !!frontmatter.dateModified) && (
       <div class="text-sm">
        Дата:{" "}
        <b class="tracking-wider">
         <time
-         datetime={machineDate(frontmatter.datePublished)}
-         set:text={readableDate(frontmatter.datePublished)}
+         datetime={machineDate(frontmatter.pubDate)}
+         set:text={readableDate(frontmatter.pubDate)}
         />
        </b>
        {!!frontmatter.dateModified && (

@@ -23,13 +23,13 @@ const simple_img = "../../../simples-imgs/simple-img.png";
    class="absolute top-3 left-3 bg-black/50 text-white p-2 rounded-lg backdrop-blur-sm"
   >
    {
-    (!!article.datePublished || !!article.dateModified) && (
+    (!!article.pubDate || !!article.dateModified) && (
      <div class="text-xs">
       Дата:{" "}
       <b class="tracking-wider">
        <time
-        datetime={machineDate(article.datePublished)}
-        set:text={readableDate(article.datePublished)}
+        datetime={machineDate(article.pubDate)}
+        set:text={readableDate(article.pubDate)}
        />
       </b>
       {!!article.dateModified && (

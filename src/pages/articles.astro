@@ -1,9 +1,9 @@
 ---
 import { seo_settings_pages } from "~/data/SEOSettings";
-import Article from "../../components/Articles/Article.astro";
-import Layout from "../../layouts/Layout.astro";
+import Article from "../components/Articles/Article.astro";
+import Layout from "../layouts/Layout.astro";
 
-const allArticles = await Astro.glob("../articles/*.{md,mdx}");
+const allArticles = await Astro.glob("./articles/*.{md,mdx}");
 ---
 
 <Layout
@@ -16,8 +16,8 @@ const allArticles = await Astro.glob("../articles/*.{md,mdx}");
     allArticles
      .sort(
       (a, b) =>
-       new Date(b.frontmatter.datePublished).valueOf() -
-       new Date(a.frontmatter.datePublished).valueOf()
+       new Date(b.frontmatter.pubDate).valueOf() -
+       new Date(a.frontmatter.pubDate).valueOf()
      )
      .map((article) => <Article url={article.url} article={article.frontmatter} />)
    }
