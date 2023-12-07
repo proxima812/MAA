@@ -11,10 +11,10 @@ export const nav_links = [
   linkName: "Собрания",
   linkTo: "/groups",
  },
- {
-  linkName: "Как проходят группы?",
-  linkTo: "/online",
- },
+//  {
+//   linkName: "Как проходят группы?",
+//   linkTo: "/online",
+//  },
  {
   linkName: "Материалы",
   linkTo: "/materials",
